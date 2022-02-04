@@ -1,11 +1,31 @@
-testing testing
+IDENTIFICATION DIVISION.
+       PROGRAM-ID. HELLO.
 
-12345
+           DATA DIVISION.
+           WORKING-STORAGE SECTION.
+           01 Choice1 PIC X(1).
+           01 UserName1 PIC A(5).
+           01 Password1 PIC A(5).
+           PROCEDURE DIVISION.
+           
+           DISPLAY "1. STUDENT LOG IN".
+           DISPLAY "2. ADMIN LOG IN".
+           DISPLAY "3. EXIT".
+           DISPLAY "Enter Your Choice : ".
+           ACCEPT Choice1.
+           IF Choice1 = 1 THEN 
+               DISPLAY "STUDENT LOG IN". 
 
-test test
+           IF Choice1 = 2 then 
+               DISPLAY "Admin log in".
+               DISPLAY "USERNAME : " UserName1.
+                ACCEPT UserName1.
+               DISPLAY "PASSWORD :  "Password1.
+                ACCEPT Password1.
+                
+               IF UserName1 is equal to 123 and  Password1 is equal to
+               1234 then DISPLAY "WELCOME ADMIN."
 
-yo yo
-DISPLAY "HELLO WORLD".
-umay
-hakdog
-yawa
+               ELSE 
+               DISPLAY "Error! Invalid Credentials!".
+           STOP RUN.
