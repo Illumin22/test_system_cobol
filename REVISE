@@ -10,8 +10,7 @@ IDENTIFICATION DIVISION.
            01 PIN1 PIC A(5).
            01 USERNUM2 PIC X(5).
            01 PIN2 PIC X(5).
-           01 Name1 PIC A(22) value "Mark Julius Hernandez".
-           01 CODE1 PIC X(6) value "123456".
+           
            PROCEDURE DIVISION.
            
            DISPLAY "--PRESS THE NUMBER OF YOUR CARD CLASSIFICATION--".
