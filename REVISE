@@ -1,0 +1,52 @@
+IDENTIFICATION DIVISION.
+       PROGRAM-ID. HELLO.
+      
+           DATA DIVISION.
+           WORKING-STORAGE SECTION.
+           01 Choice1 PIC X(1).
+           01 Choice2  PIC X(1).
+           01 Choice3 PIC X(1).
+           01 USERNUM1 PIC A(5).
+           01 PIN1 PIC A(5).
+           01 USERNUM2 PIC X(5).
+           01 PIN2 PIC X(5).
+           01 Name1 PIC A(22) value "Mark Julius Hernandez".
+           01 CODE1 PIC X(6) value "123456".
+           PROCEDURE DIVISION.
+           
+           DISPLAY "--PRESS THE NUMBER OF YOUR CARD CLASSIFICATION--".
+           DISPLAY "1. CREDIT CARD".
+           DISPLAY "2. DEBIT CARD".
+           DISPLAY "3. EXIT".
+           DISPLAY "->  " WITH NO ADVANCING
+            ACCEPT Choice1.
+           
+            IF Choice1 = 1 THEN 
+           DISPLAY "PRESS THE NUM INPUT CARD NUMBER OF YOUR TRANSACTION".                    
+               DISPLAY "1. INSERT CARD/BER".
+               DISPLAY "2. EXIT".
+               DISPLAY "-> " WITH NO ADVANCING
+               ACCEPT Choice2.
+                    IF Choice2 = 2 THEN 
+                    DISPLAY "GOODBYE"
+                        STOP RUN. 
+                   IF Choice2 = 1 THEN
+                   display " "
+                   display " "
+                   DISPLAY "SKIMMER IS UNDETECTED OR IS UNAVAILABLE".
+             DISPLAY "PLEASE INPUT YOUR CARD NUMBER: " WITH NO ADVANCING
+                      ACCEPT USERNUM1.
+             DISPLAY "PLEASE INPUT YOUR 6-DIGIT PIN: " WITH NO ADVANCING
+                      ACCEPT PIN1.
+                        IF (USERNUM1 = 12345) AND
+                         (PIN1 = 54321) THEN
+                          DISPLAY " "
+                          DISPLAY " "
+                          DISPLAY "HELLO CREDIT"
+                        ELSE
+                        DISPLAY " "
+                        DISPLAY " "
+                        DISPLAY "SORRY, INCORRECT CREDENTIALS. GOODBYE."
+                                   END-IF
+                               STOP RUN.
+                      
