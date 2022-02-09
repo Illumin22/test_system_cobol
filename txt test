@@ -1,8 +1,13 @@
-IDENTIFICATION DIVISION.
-       PROGRAM-ID. HELLO.
-
-           DATA DIVISION.
-           WORKING-STORAGE SECTION.
+      ******************************************************************
+      * Author: GROUP 6
+      * Date: FEB 2022
+      * Purpose: COMPROG3 FINAL PROJECT
+      * Tectonics: cobc
+      ******************************************************************
+       IDENTIFICATION DIVISION.
+       PROGRAM-ID. ATM_SYSTEM.
+       DATA DIVISION.
+       WORKING-STORAGE SECTION.
            01 CHOICE1 PIC X(1).
            01 CHOICE2 PIC X(1).
            01 CHOICE3 PIC X(1).
@@ -11,62 +16,52 @@ IDENTIFICATION DIVISION.
            01 PIN1 PIC 9(6).
            01 PIN2 PIC 9(6).
            
-           PROCEDURE DIVISION.
+       PROCEDURE DIVISION.
+       MAIN-PROCEDURE.
+           DISPLAY "***PLEASE INPUT THE NUMBER OF YOUR CHOICE***"
+           DISPLAY "1. CREDIT CARD"
+           DISPLAY "2. DEBIT CARD"
+           DISPLAY "3. EXIT"
+           DISPLAY "-> "
+            ACCEPT CHOICE1
            
-           DISPLAY "-----PRESS THE NUMBER OF YOUR CARD CLASSIFICATION-----"
-           DISPLAY "1. CREDIT CARD".
-           DISPLAY "2. DEBIT CARD".
-           DISPLAY "3. EXIT".
-           DISPLAY "-> " CHOICE1.
-            ACCEPT CHOICE1.
-            
-           IF CHOICE1 = 2 THEN
-                     DISPLAY "-----PRESS THE NUMBER OF YOUR TRANSACTION-----"
-                     DISPLAY "1. INSERT CARD/INPUT CARD NUMBER".
-                     DISPLAY "2. EXIT".
-                     DISPLAY "->: " CHOICE2.
-                      ACCEPT CHOICE2.
-              IF CHOICE2 = 1 THEN 
-                     DISPLAY "SKIMMER IS UNDETECTED OR IS UNAVAILABLE".
-                     DISPLAY "PLEASE INPUT YOUR CARD NUMBER: " USERNUM1.
-                      ACCEPT USERNUM1.
-                     DISPLAY "PLEASE INPUT YOUR 6-DIGIT PIN: " PIN1.
-                      ACCEPT PIN1.
-                            IF (USERNUM1 = 1234567890123456) AND (PIN1 = 123456) THEN
-                                   DISPLAY "HELLO DEBIT"
-                            ELSE
-                                   DISPLAY "SORRY, INCORRECT CREDENTIALS. GOODBYE."
-                                   STOP RUN.
-                            END IF.
-              END IF.
-              IF CHOICE2 = 2 THEN
-                     DISPLAY "GOODBYE!".
-                     STOP RUN.
-              END IF.
-           END IF.
-
-           IF CHOICE1 = 1 THEN 
-               DISPLAY "-----PRESS THE NUMBER OF YOUR TRANSACTION-----"
-                     DISPLAY "1. INSERT CARD/INPUT CARD NUMBER".
-                     DISPLAY "2. EXIT".
-                     DISPLAY "->: " CHOICE3.
-                      ACCEPT CHOICE3.
-              IF CHOICE2 = 1 THEN 
-                     DISPLAY "SKIMMER IS UNDETECTED OR IS UNAVAILABLE".
-                     DISPLAY "PLEASE INPUT YOUR CARD NUMBER: " USERNUM2.
-                      ACCEPT USERNUM2.
-                     DISPLAY "PLEASE INPUT YOUR 6-DIGIT PIN: " PIN2.
-                      ACCEPT PIN2.
-                            IF (USERNUM2 = 65432210987654321) AND (PIN1 = 654321) THEN
-                                   DISPLAY "HELLO CREDIT"
-                            ELSE
-                                   DISPLAY "SORRY, INCORRECT CREDENTIALS. GOODBYE."
-                                   STOP RUN.
-                            END IF.
-              END IF.
-              IF CHOICE3 = 2 THEN
-                     DISPLAY "GOODBYE!".
-                     STOP RUN.
-              END IF.
-           END IF.
+           EVALUATE TRUE
+               WHEN CHOICE1 = "2"
+                DISPLAY "***PRESS THE NUMBER OF YOUR TRANSACTION***"
+                DISPLAY "1. INPUT CARD NUMBER"
+                DISPLAY "2. EXIT"
+                DISPLAY "-> "
+                 ACCEPT CHOICE3
+               WHEN CHOICE1 = "3"
+                EXIT
+               WHEN OTHER
+                DISPLAY "INVALID USER INPUT"
+           END-EVALUATE
+           
+               EVALUATE TRUE  
+                  WHEN CHOICE3 = "1"
+                   DISPLAY "*SKIMMER IS UNDETECTED OR IS UNAVAILABLE*"
+                   DISPLAY "***PLEASE INPUT YOUR CARD NUMBER***"
+                    ACCEPT USERNUM2
+                   DISPLAY "***PLEASE INPUT YOUR 6-DIGIT PIN***"
+                    ACCEPT PIN2 
+                   EVALUATE TRUE
+                    WHEN USERNUM2="1234567890123456" AND PIN2="123456"
+                     DISPLAY "*HELLO DEBIT*"
+                    WHEN USERNUM2 IS NOT= "1234567890123456" AND PIN2 IS NOT= "123456"
+                     DISPLAY "*SORRY, INCORRECT CREDENTIALS. GOODBYE*"
+                     EXIT
+                   
+                  WHEN CHOICE3 = "2"
+                   DISPLAY "GOODBYE"
+                   EXIT
+                   
+                  WHEN CHOICE3 IS NOT= "1" OR "2" OR "3"
+                   DISPLAY "INVALID USER INPUT"
+                   EXIT
+               END-EVALUATE
+               
            STOP RUN.
+           
+       END PROGRAM ATM_SYSTEM.
+
