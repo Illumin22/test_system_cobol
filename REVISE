@@ -4,8 +4,8 @@
       * Purpose: COMPROG3 FINAL PROJECT
       * Tectonics: cobc
       ******************************************************************
-       IDENTIFICATION DIVISION.
-       PROGRAM-ID. elo.
+              IDENTIFICATION DIVISION.
+       PROGRAM-ID. lo.
        DATA DIVISION.
        WORKING-STORAGE SECTION.
            01 CHOICE1 PIC X(1).
@@ -24,19 +24,32 @@
            DISPLAY "3. EXIT"
            DISPLAY "-> " WITH NO ADVANCING
             ACCEPT CHOICE1
-           
+          
            EVALUATE TRUE
+               
                WHEN CHOICE1 = "2"
                 DISPLAY "***PRESS THE NUMBER OF YOUR TRANSACTION***"
                 DISPLAY "1. INPUT CARD NUMBER"
                 DISPLAY "2. EXIT"
                 DISPLAY "-> " WITH NO ADVANCING
                  ACCEPT CHOICE3
+                 
                WHEN CHOICE1 = "3"
                 DISPLAY "GOODBYE!"
-               WHEN CHOICE1 IS NOT = '1' OR '2' OR '3'
+               WHEN CHOICE1 > 3
                    DISPLAY "INVALID USER INPUT"
            END-EVALUATE
+           EVALUATE TRUE
+           WHEN CHOICE1 = "1"
+             DISPLAY "SKIMMER IS UNDETECTED OR IS UNAVAILABLE".
+             DISPLAY "PLEASE INPUT YOUR CARD NUMBER: "WITH NO ADVANCING
+                      ACCEPT USERNUM1.
+            DISPLAY "PLEASE INPUT YOUR 6-DIGIT PIN: " WITH NO ADVANCING
+                      ACCEPT PIN1.
+                            IF (USERNUM1 = 1) AND (PIN1 = 1) THEN
+                                   DISPLAY "HELLO CREDIT"
+                             ELSE  
+                         DISPLAY "SORRY INCORRECT CREDENTIALS, GOODBYE!"
            
                EVALUATE TRUE  
                   WHEN CHOICE3 = "1"
@@ -55,8 +68,7 @@
                    
                   WHEN CHOICE3 = "2"
                    DISPLAY "GOODBYE"
-                   WHEN OTHER  
-                   DISPLAY "INVALID USER INPUT!"
+                   
                    EXIT
                    
             
