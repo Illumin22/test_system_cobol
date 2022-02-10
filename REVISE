@@ -1,51 +1,62 @@
-IDENTIFICATION DIVISION.
-       PROGRAM-ID. HELLO.
-      
-           DATA DIVISION.
-           WORKING-STORAGE SECTION.
-           01 Choice1 PIC X(1).
-           01 Choice2  PIC X(1).
-           01 Choice3 PIC X(1).
-           01 USERNUM1 PIC A(5).
-           01 PIN1 PIC A(5).
-           01 USERNUM2 PIC X(5).
-           01 PIN2 PIC X(5).
+ ******************************************************************
+      * Author: GROUP 6
+      * Date: FEB 2022
+      * Purpose: COMPROG3 FINAL PROJECT
+      * Tectonics: cobc
+      ******************************************************************
+       IDENTIFICATION DIVISION.
+       PROGRAM-ID. elo.
+       DATA DIVISION.
+       WORKING-STORAGE SECTION.
+           01 CHOICE1 PIC X(1).
+           01 CHOICE2 PIC X(1).
+           01 CHOICE3 PIC X(1).
+           01 USERNUM1 PIC 9(16).
+           01 USERNUM2 PIC 9(16).
+           01 PIN1 PIC 9(6).
+           01 PIN2 PIC 9(6).
            
            PROCEDURE DIVISION.
+           MAIN-PROCEDURE.
+           DISPLAY "***PLEASE INPUT THE NUMBER OF YOUR CHOICE***"
+           DISPLAY "1. CREDIT CARD"
+           DISPLAY "2. DEBIT CARD"
+           DISPLAY "3. EXIT"
+           DISPLAY "-> " WITH NO ADVANCING
+            ACCEPT CHOICE1
            
-           DISPLAY "--PRESS THE NUMBER OF YOUR CARD CLASSIFICATION--".
-           DISPLAY "1. CREDIT CARD".
-           DISPLAY "2. DEBIT CARD".
-           DISPLAY "3. EXIT".
-           DISPLAY "->  " WITH NO ADVANCING
-            ACCEPT Choice1.
+           EVALUATE TRUE
+               WHEN CHOICE1 = "2"
+                DISPLAY "***PRESS THE NUMBER OF YOUR TRANSACTION***"
+                DISPLAY "1. INPUT CARD NUMBER"
+                DISPLAY "2. EXIT"
+                DISPLAY "-> " WITH NO ADVANCING
+                 ACCEPT CHOICE3
+               WHEN CHOICE1 = "3"
+                EXIT
+               WHEN OTHER
+                DISPLAY "INVALID USER INPUT"
+           END-EVALUATE
            
-            IF Choice1 = 1 THEN 
-           DISPLAY "PRESS THE NUM INPUT CARD NUMBER OF YOUR TRANSACTION".                    
-               DISPLAY "1. INSERT CARD/BER".
-               DISPLAY "2. EXIT".
-               DISPLAY "-> " WITH NO ADVANCING
-               ACCEPT Choice2.
-                    IF Choice2 = 2 THEN 
-                    DISPLAY "GOODBYE"
-                        STOP RUN. 
-                   IF Choice2 = 1 THEN
-                   display " "
-                   display " "
-                   DISPLAY "SKIMMER IS UNDETECTED OR IS UNAVAILABLE".
-             DISPLAY "PLEASE INPUT YOUR CARD NUMBER: " WITH NO ADVANCING
-                      ACCEPT USERNUM1.
-             DISPLAY "PLEASE INPUT YOUR 6-DIGIT PIN: " WITH NO ADVANCING
-                      ACCEPT PIN1.
-                        IF (USERNUM1 = 12345) AND
-                         (PIN1 = 54321) THEN
-                          DISPLAY " "
-                          DISPLAY " "
-                          DISPLAY "HELLO CREDIT"
-                        ELSE
-                        DISPLAY " "
-                        DISPLAY " "
-                        DISPLAY "SORRY, INCORRECT CREDENTIALS. GOODBYE."
-                                   END-IF
-                               STOP RUN.
-                      
+               EVALUATE TRUE  
+                  WHEN CHOICE3 = "1"
+           DISPLAY "*SKIMMER IS UNDETECTED OR IS UNAVAILABLE*"
+           DISPLAY "*PLEASE INPUT YOUR CARD NUMBER* "WITH NO ADVANCING
+                    ACCEPT USERNUM2
+           DISPLAY "*PLEASE INPUT YOUR 6-DIGIT PIN* "WITH NO ADVANCING
+                    ACCEPT PIN2 
+                   EVALUATE TRUE
+                    WHEN USERNUM2 = 2 AND PIN2 = 2
+                     DISPLAY "*HELLO DEBIT*"
+                    WHEN OTHER
+                     DISPLAY "*SORRY, INCORRECT CREDENTIALS. GOODBYE*"
+                         END-EVALUATE
+                     EXIT
+                   
+                  WHEN CHOICE3 = "2"
+                   DISPLAY "GOODBYE"
+                   EXIT
+                   
+            
+               
+           STOP RUN.
