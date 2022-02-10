@@ -33,9 +33,9 @@
                 DISPLAY "-> " WITH NO ADVANCING
                  ACCEPT CHOICE3
                WHEN CHOICE1 = "3"
-                EXIT
-               WHEN OTHER
-                DISPLAY "INVALID USER INPUT"
+                DISPLAY "GOODBYE!"
+               WHEN CHOICE1 IS NOT = '1' OR '2' OR '3'
+                   DISPLAY "INVALID USER INPUT"
            END-EVALUATE
            
                EVALUATE TRUE  
@@ -55,8 +55,11 @@
                    
                   WHEN CHOICE3 = "2"
                    DISPLAY "GOODBYE"
+                   WHEN OTHER  
+                   DISPLAY "INVALID USER INPUT!"
                    EXIT
                    
             
                
            STOP RUN.
+           
