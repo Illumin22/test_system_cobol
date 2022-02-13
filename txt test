@@ -1,67 +1,122 @@
       ******************************************************************
       * Author: GROUP 6
-      * Date: FEB 2022
-      * Purpose: COMPROG3 FINAL PROJECT
+      * Date: Feb 2022
+      * Purpose: COMPROG3 Final Project
       * Tectonics: cobc
       ******************************************************************
        IDENTIFICATION DIVISION.
-       PROGRAM-ID. ATM_SYSTEM.
+       PROGRAM-ID. ATM-SYSTEM.
        DATA DIVISION.
        WORKING-STORAGE SECTION.
+           01 DEBITBAL PIC 9(7).
+           01 DEBITDEPOSIT PIC 9(7).
            01 CHOICE1 PIC X(1).
            01 CHOICE2 PIC X(1).
            01 CHOICE3 PIC X(1).
-           01 USERNUM1 PIC 9(16).
-           01 USERNUM2 PIC 9(16).
+           01 CHOICE4 PIC X(1).
+           01 CHOICE5 PIC X(1).
+           01 CHOICE6 PIC X(1).
+           01 CHOICE7 PIC X(1).
+           01 CHOICE8 PIC X(1).
+           01 USERNUM1 PIC 9(10).
+           01 USERNUM2 PIC 9(10).
            01 PIN1 PIC 9(6).
            01 PIN2 PIC 9(6).
-           
+
        PROCEDURE DIVISION.
        MAIN-PROCEDURE.
+       A-PARA.
            DISPLAY "***PLEASE INPUT THE NUMBER OF YOUR CHOICE***"
            DISPLAY "1. CREDIT CARD"
            DISPLAY "2. DEBIT CARD"
            DISPLAY "3. EXIT"
-           DISPLAY "-> "
-            ACCEPT CHOICE1
-           
-           EVALUATE TRUE
-               WHEN CHOICE1 = "2"
-                DISPLAY "***PRESS THE NUMBER OF YOUR TRANSACTION***"
-                DISPLAY "1. INPUT CARD NUMBER"
-                DISPLAY "2. EXIT"
-                DISPLAY "-> "
-                 ACCEPT CHOICE3
-               WHEN CHOICE1 = "3"
-                EXIT
-               WHEN OTHER
-                DISPLAY "INVALID USER INPUT"
-           END-EVALUATE
-           
-               EVALUATE TRUE  
-                  WHEN CHOICE3 = "1"
-                   DISPLAY "*SKIMMER IS UNDETECTED OR IS UNAVAILABLE*"
-                   DISPLAY "***PLEASE INPUT YOUR CARD NUMBER***"
-                    ACCEPT USERNUM2
-                   DISPLAY "***PLEASE INPUT YOUR 6-DIGIT PIN***"
-                    ACCEPT PIN2 
-                   EVALUATE TRUE
-                    WHEN USERNUM2="1234567890123456" AND PIN2="123456"
-                     DISPLAY "*HELLO DEBIT*"
-                    WHEN USERNUM2 IS NOT= "1234567890123456" AND PIN2 IS NOT= "123456"
-                     DISPLAY "*SORRY, INCORRECT CREDENTIALS. GOODBYE*"
-                     EXIT
-                   
-                  WHEN CHOICE3 = "2"
-                   DISPLAY "GOODBYE"
-                   EXIT
-                   
-                  WHEN CHOICE3 IS NOT= "1" OR "2" OR "3"
-                   DISPLAY "INVALID USER INPUT"
-                   EXIT
-               END-EVALUATE
-               
-           STOP RUN.
-           
-       END PROGRAM ATM_SYSTEM.
+            ACCEPT CHOICE1.
 
+           EVALUATE TRUE
+             WHEN CHOICE1 = "1"
+               GO TO B-PARA
+             WHEN CHOICE1 = "2"
+               GO TO C-PARA
+             WHEN CHOICE1 = "3"
+               GO TO F-PARA
+             WHEN CHOICE1 IS NOT= "1" OR "2" OR "3"
+               GO TO E-PARA
+           END-EVALUATE.
+
+       B-PARA.
+           DISPLAY "***".
+
+       C-PARA.
+           DISPLAY "***PLEASE INPUT YOUR LOGIN CREDENTIALS***"
+           DISPLAY "10-DIGIT CARD NUMBER: "
+             ACCEPT USERNUM2
+           DISPLAY "6-DIGIT PIN: "
+             ACCEPT PIN2.
+
+           EVALUATE TRUE
+           WHEN (USERNUM2 = "1234567890" AND PIN2 = "123456")
+               GO TO C1-PARA
+           WHEN (USERNUM2 IS NOT= "1234567890"AND PIN2 IS NOT="123456")
+               DISPLAY "SORRY, INCORRECT CREDENTIALS."
+               GO TO C-PARA
+           END-EVALUATE.
+
+       C1-PARA.
+           DISPLAY "***PRESS THE NUMBER OF YOUR TRANSACTION***"
+           DISPLAY "1. BALANCE INQUIRY"
+           DISPLAY "2. DEPOSIT"
+           DISPLAY "3. WITHDRAWAL"
+           DISPLAY "4. EXIT"
+             ACCEPT CHOICE2.
+
+           EVALUATE TRUE
+             WHEN CHOICE2 = "1"
+               GO TO C2-PARA
+             WHEN CHOICE2 = "2"
+               GO TO C3-PARA
+             WHEN CHOICE2 IS NOT= "1" OR "2" OR "3" OR "4"
+               GO TO E-PARA
+           END-EVALUATE.
+
+
+       C2-PARA.
+           DISPLAY "YOUR CURRENT BALANCE IS: "
+           DISPLAY DEBITBAL.
+           DISPLAY "WOULD YOU LIKE ANOTHER TRANSACTION?"
+           DISPLAY "1. YES"
+           DISPLAY "2. NO"
+             ACCEPT CHOICE3.
+
+           EVALUATE TRUE
+             WHEN CHOICE3 = "1"
+               GO TO A-PARA
+             WHEN CHOICE3 = "2"
+               GO TO F-PARA
+             WHEN CHOICE3 IS NOT= "1" OR "2" OR "3"
+               GO TO E-PARA
+           END-EVALUATE.
+
+       C3-PARA.
+           DISPLAY "HOW MUCH WOULD YOU LIKE TO DEPOSIT?"
+             ACCEPT DEBITDEPOSIT.
+             EXIT.
+
+
+       C4-PARA.
+           DISPLAY"C4-PARA TEST"
+           EXIT.
+
+       D-PARA.
+           DISPLAY " D-PARA TEST".
+           EXIT.
+
+       E-PARA.
+           DISPLAY "INVALID USER INPUT, PLEASE TRY AGAIN".
+           GO TO A-PARA.
+
+       F-PARA.
+           DISPLAY "GOODBYE!".
+           EXIT.
+
+           STOP RUN.
+       END PROGRAM ATM-SYSTEM.
