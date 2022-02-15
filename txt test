@@ -10,6 +10,7 @@
        WORKING-STORAGE SECTION.
            01 DEBITBAL PIC 9(7).
            01 DEBITDEPOSIT PIC 9(7).
+           01 DEBITWTIHDRAWAL PIC 9(7).
            01 CHOICE1 PIC X(1).
            01 CHOICE2 PIC X(1).
            01 CHOICE3 PIC X(1).
@@ -89,7 +90,7 @@
 
            EVALUATE TRUE
              WHEN CHOICE3 = "1"
-               GO TO A-PARA
+               GO TO C-PARA
              WHEN CHOICE3 = "2"
                GO TO F-PARA
              WHEN CHOICE3 IS NOT= "1" OR "2" OR "3"
@@ -99,15 +100,21 @@
        C3-PARA.
            DISPLAY "HOW MUCH WOULD YOU LIKE TO DEPOSIT?"
              ACCEPT DEBITDEPOSIT.
-             EXIT.
+           ADD DEBITDEPOSIT TO DEBITBAL
+           END-ADD.
+           DISPLAY "YOUR NEW BALANCE IS: "
+           DISPLAY DEBITBAL
+           DISPLAY "PRESS ENTER TO PROCEED"
+             GO TO C2-PARA.
 
 
        C4-PARA.
-           DISPLAY"C4-PARA TEST"
-           EXIT.
+           DISPLAY "HOW MUCH WOULD YOU LIKE TO WITHDRAW?"
+             ACCEPT DEBITWTIHDRAWAL.
+             EXIT.
 
        D-PARA.
-           DISPLAY " D-PARA TEST".
+           DISPLAY "D-PARA TEST".
            EXIT.
 
        E-PARA.
