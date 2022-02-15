@@ -75,6 +75,10 @@
                GO TO C2-PARA
              WHEN CHOICE2 = "2"
                GO TO C3-PARA
+             WHEN CHOICE2 = "3"
+               GO TO C4-PARA
+             WHEN CHOICE2 = "4"
+               GO TO F-PARA
              WHEN CHOICE2 IS NOT= "1" OR "2" OR "3" OR "4"
                GO TO E-PARA
            END-EVALUATE.
@@ -100,8 +104,10 @@
        C3-PARA.
            DISPLAY "HOW MUCH WOULD YOU LIKE TO DEPOSIT?"
              ACCEPT DEBITDEPOSIT.
+           
            ADD DEBITDEPOSIT TO DEBITBAL
            END-ADD.
+           
            DISPLAY "YOUR NEW BALANCE IS: "
            DISPLAY DEBITBAL
            DISPLAY "PRESS ENTER TO PROCEED"
@@ -109,9 +115,30 @@
 
 
        C4-PARA.
+           DISPLAY "YOUR CURRENT BALANCE IS: "
+           DISPLAY DEBITBAL
            DISPLAY "HOW MUCH WOULD YOU LIKE TO WITHDRAW?"
              ACCEPT DEBITWTIHDRAWAL.
-             EXIT.
+             
+             IF DEBITWTIHDRAWAL IS GREATER THAN DEBITBAL THEN
+               DISPLAY "INSUFFICIENT BALANCE"
+               GO TO C4B-PARA
+             ELSE
+               GO TO C4A-PARA
+             END-IF.  
+             
+        C4A-PARA.
+           SUBTRACT DEBITWTIHDRAWAL FROM DEBITBAL
+           END-SUBTRACT.
+           
+           DISPLAY "PLEASE TAKE THE CASH FROM THE CASH DISPENSER"
+           DISPLAY "YOUR NEW BALANCE IS: "
+           DISPLAY DEBITBAL
+             GO TO C2-PARA.
+           
+        C4B-PARA.
+           GO TO C4-PARA.
+           
 
        D-PARA.
            DISPLAY "D-PARA TEST".
